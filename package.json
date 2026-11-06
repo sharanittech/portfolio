@@ -1,0 +1,17 @@
+{
+  "name": "sharan-portfolio-tests",
+  "version": "1.0.0",
+  "description": "Comprehensive Playwright test suite for Sharan R's portfolio website and motion system",
+  "main": "index.html",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "serve": "python -m http.server 8000"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0"
+  }
+}

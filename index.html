@@ -3,72 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sharan R | Portfolio</title>
-    <meta name="description" content="Portfolio of Sharan R, a Full Stack Developer and ML enthusiast. Projects, skills, education, and contact details.">
-    <meta property="og:title" content="Sharan R | Portfolio">
-    <meta property="og:description" content="Full Stack Developer and ML enthusiast. Projects, skills, education, and contact details.">
+    <title>Sharan R | Full Stack Developer & ML Portfolio</title>
+    <meta name="description" content="Portfolio of Sharan R: Software Developer Intern at Inteovo Edu, Full Stack Developer, and ML Enthusiast. Explore enterprise React, TypeScript, Python, and cloud projects.">
+    <meta name="keywords" content="Sharan R, Full Stack Developer, Machine Learning, React, TypeScript, Python, PostgreSQL, Inteovo Edu, Sathyabama, Software Engineer, Portfolio">
+    <meta name="author" content="Sharan R">
+    <meta property="og:title" content="Sharan R | Full Stack Developer & ML Engineer">
+    <meta property="og:description" content="Building scalable web apps and machine learning pipelines. Explore projects, certifications, and live interactive simulators.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="logo.png">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sharan R | Full Stack Developer & ML Portfolio">
+    <meta name="twitter:description" content="Software Developer Intern at Inteovo Edu, building modern React/TypeScript & ML solutions.">
+    <meta name="twitter:image" content="logo.png">
     <meta name="theme-color" content="#050505">
     <meta name="color-scheme" content="dark">
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="manifest" href="manifest.json">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <!-- Motion System Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
+    <script src="motion-config.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 <body>
 
-<a class="skip-link" href="#main">Skip to content</a>
-<div class="cursor"></div>
-<button class="to-top" type="button" aria-label="Back to top">Top</button>
-
-<nav class="navbar" aria-label="Primary">
-    <!-- <div class="logo"><img src="logo.png"></div> -->
-
-    <div class="logo">SHARAN<span>.R</span></div>
-    <div class="nav-right">
-        <div class="nav-actions">
-            <button class="toggle-btn theme-toggle" type="button" aria-pressed="false" aria-label="Toggle theme">
-                <span class="theme-icon" aria-hidden="true"></span>
-            </button>
+<!-- PRELOADER -->
+<div id="preloader" class="preloader" aria-hidden="true">
+    <div class="preloader-curtain">
+        <div class="preloader-content">
+            <div class="preloader-logo-wrap">
+                <svg class="preloader-svg" viewBox="0 0 460 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path class="preloader-bracket" d="M 40,18 L 15,18 L 15,72 L 40,72" stroke="url(#preloader-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <text x="50%" y="54%" text-anchor="middle" dominant-baseline="central" class="preloader-text">SHARAN<tspan class="preloader-text-accent">.R</tspan></text>
+                    <path class="preloader-bracket" d="M 420,18 L 445,18 L 445,72 L 420,72" stroke="url(#preloader-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                        <linearGradient id="preloader-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#F5B301" />
+                            <stop offset="100%" stop-color="#FF8A00" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <div class="preloader-counter-wrap">
+                <span class="preloader-counter" id="preloader-counter">0</span>
+                <span class="preloader-percent">%</span>
+            </div>
+            <div class="preloader-track">
+                <div class="preloader-fill" id="preloader-fill"></div>
+            </div>
         </div>
-        <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+    </div>
+</div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<!-- Top Amber Scroll Progress Bar -->
+<div id="scroll-progress" class="scroll-progress-bar" aria-hidden="true"></div>
+
+<!-- Dual-Stage Custom Cursor -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"><span class="cursor-label"></span></div>
+<button class="to-top" type="button" aria-label="Back to top" id="to-top-btn">
+    <svg class="to-top-svg" viewBox="0 0 44 44" aria-hidden="true">
+        <circle class="to-top-track" cx="22" cy="22" r="18" />
+        <circle class="to-top-indicator" id="to-top-circle" cx="22" cy="22" r="18" />
+    </svg>
+    <span class="to-top-icon"><i class="fas fa-arrow-up"></i></span>
+</button>
+
+<nav class="navbar" id="navbar" aria-label="Primary">
+    <div class="nav-container">
+        <!-- BRAND LOGO & AVAILABILITY STATUS -->
+        <a href="#home" class="nav-brand" aria-label="Sharan R - Back to top">
+            <span class="logo">SHARAN<span>.R</span></span>
+            <span class="nav-status-badge" title="Open for Software Engineering opportunities">
+                <span class="status-dot"></span>
+                <span class="status-text">Available</span>
+            </span>
+        </a>
+
+        <!-- CENTER FLOATING GLASS NAVIGATION PILL -->
         <div class="nav-links" id="nav-links">
+            <div class="nav-indicator" aria-hidden="true"></div>
             <a href="#home">Home</a>
+            <a href="#about">About</a>
             <a href="#skills">Skills</a>
             <a href="#projects">Work</a>
             <a href="#education">Education</a>
-            <a href="#contact" class="nav-cta">Get in Touch</a>
+            <a href="#experience">Timeline</a>
+            <a href="#contact" class="nav-cta">Contact</a>
+        </div>
+
+        <!-- RIGHT CONTROLS ISLAND & ACTIONS -->
+        <div class="nav-right">
+            <!-- Quick Search (Ctrl+K) -->
+            <button class="toggle-btn cmd-palette-btn" id="cmd-palette-btn" type="button" aria-label="Open Command Palette (Ctrl+K)" title="Quick Search (Ctrl + K)">
+                <i class="fas fa-search"></i>
+                <kbd class="nav-kbd">⌘K</kbd>
+            </button>
+
+            <!-- Unified Preferences Capsule -->
+            <div class="nav-controls-cluster">
+                <button class="toggle-btn terminal-btn" id="terminal-toggle-btn" type="button" aria-label="Open Developer Terminal" title="Developer Terminal CLI">
+                    <i class="fas fa-terminal"></i>
+                </button>
+                <button class="toggle-btn sound-toggle" id="sound-toggle-btn" type="button" aria-pressed="false" aria-label="Toggle sound effects" title="Audio Effects (Muted)">
+                    <i class="fas fa-volume-mute" id="sound-icon"></i>
+                </button>
+                <button class="toggle-btn motion-toggle" id="motion-toggle-btn" type="button" aria-pressed="true" aria-label="Toggle animations" title="Toggle Motion">
+                    <span class="motion-icon"><i class="fas fa-wand-magic-sparkles"></i></span>
+                    <span class="motion-text" style="display: none;">Motion On</span>
+                </button>
+                <div class="accent-picker-wrap">
+                    <button class="toggle-btn accent-picker-btn" id="accent-picker-btn" type="button" aria-label="Change Accent Color" title="Theme Accent Color">
+                        <span class="accent-dot-preview" id="accent-dot-preview"></span>
+                    </button>
+                    <div class="accent-dropdown" id="accent-dropdown" aria-hidden="true">
+                        <button type="button" class="accent-swatch active" data-accent="amber" title="Solar Amber (Default)" style="--swatch-color: #f4b400;"></button>
+                        <button type="button" class="accent-swatch" data-accent="cyan" title="Cyber Cyan" style="--swatch-color: #00f2fe;"></button>
+                        <button type="button" class="accent-swatch" data-accent="emerald" title="Neon Emerald" style="--swatch-color: #00e676;"></button>
+                        <button type="button" class="accent-swatch" data-accent="violet" title="Electric Violet" style="--swatch-color: #a855f7;"></button>
+                    </div>
+                </div>
+                <button class="toggle-btn theme-toggle" type="button" aria-pressed="false" aria-label="Toggle theme" title="Toggle Theme">
+                    <svg class="theme-morph-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <mask id="theme-moon-mask">
+                            <rect x="0" y="0" width="100%" height="100%" fill="white" />
+                            <circle class="moon-cutout" cx="17" cy="7" r="8" fill="black" />
+                        </mask>
+                        <circle class="sun-core" cx="12" cy="12" r="5" fill="currentColor" mask="url(#theme-moon-mask)" />
+                        <g class="sun-rays" stroke="currentColor">
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </g>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </div>
 </nav>
 
 <main id="main">
 <section id="home" class="hero">
+    <!-- Interactive Particle Background Canvas -->
+    <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+
     <div class="container">
         <div class="hero-content">
-            <h1 class="reveal">Building the <span class="accent">Future</span> with Code.</h1>
-            <p class="hero-sub reveal">Full Stack Developer & ML Enthusiast. Pursuing B.E in CSE at Sathyabama Institute. I turn complex problems into elegant digital solutions.</p>
+            <h1 class="reveal">Building the <span class="accent accent-shimmer">Future</span> with Code.</h1>
+            <p class="hero-sub reveal"><span class="hero-role-typewriter"><span class="typewriter-text">Full Stack Developer</span><span class="typewriter-cursor" aria-hidden="true">|</span></span>. Pursuing B.E in CSE at Sathyabama Institute. I turn complex problems into elegant digital solutions.</p>
+            <div class="hero-location-beacon reveal" id="hero-location-beacon">
+                <span class="beacon-pin"><i class="fas fa-location-dot"></i></span>
+                <span class="beacon-location">Chennai, India</span>
+                <span class="beacon-sep">•</span>
+                <span class="beacon-time" id="hero-live-time">--:-- -- IST</span>
+                <span class="beacon-sep">•</span>
+                <span class="beacon-status">
+                    <span class="status-dot"></span>
+                    <span>Ready for Software Roles</span>
+                </span>
+            </div>
+            <!-- 15-SECOND AUDIO ELEVATOR PITCH -->
+            <div class="hero-pitch-pill reveal" id="hero-pitch-pill">
+                <button type="button" class="pitch-play-btn" id="pitch-play-btn" aria-label="Play 15-second elevator pitch">
+                    <span class="pitch-icon"><i class="fas fa-play" id="pitch-play-icon"></i></span>
+                    <span class="pitch-text" id="pitch-text">15s Audio Pitch</span>
+                    <span class="pitch-wave" aria-hidden="true" id="pitch-wave">
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                    </span>
+                </button>
+                <div class="pitch-transcript" id="pitch-transcript" aria-live="polite">"Hi, I'm Sharan R — Full Stack Developer & ML enthusiast from Chennai. Welcome to my portfolio!"</div>
+            </div>
             <div class="hero-actions reveal">
                 <a id="resume-download" href="sharan resume.pdf" download class="btn-resume" aria-label="Download resume PDF">Download CV</a>
+                <button type="button" id="resume-preview-btn" class="btn-work">Preview CV</button>
+                <button type="button" id="hero-onepager-btn" class="btn-work" title="Open 1-Page Recruiter Summary View"><i class="fas fa-file-invoice"></i> One-Pager</button>
                 <a href="#projects" class="btn-work">View Projects</a>
             </div>
             <p class="download-meta reveal">Resume downloads: <span id="download-count" aria-live="polite">0</span></p>
         </div>
         <div class="hero-visual reveal">
-            <picture>
-                <source srcset="sharan photo.webp" type="image/webp">
-                <img src="sharan photo.jpg" alt="Portrait of Sharan R" decoding="async" loading="eager" fetchpriority="high">
-            </picture>
+            <div class="photo-glow-ring" aria-hidden="true"></div>
+            <div class="photo-card" id="hero-photo-card">
+                <picture>
+                    <source srcset="sharan photo.webp" type="image/webp">
+                    <img src="sharan photo.jpg" alt="Portrait of Sharan R" decoding="async" loading="eager" fetchpriority="high">
+                </picture>
+            </div>
+            <!-- Orbiting Tech Badges -->
+            <div class="orbit-badge orbit-react" data-tech="react" aria-hidden="true" title="React">
+                <i class="fab fa-react" style="color: #61DAFB;"></i>
+            </div>
+            <div class="orbit-badge orbit-python" data-tech="python" aria-hidden="true" title="Python">
+                <i class="fab fa-python" style="color: #3776AB;"></i>
+            </div>
+            <div class="orbit-badge orbit-docker" data-tech="docker" aria-hidden="true" title="Docker">
+                <i class="fab fa-docker" style="color: #2496ED;"></i>
+            </div>
+            <div class="orbit-badge orbit-node" data-tech="node" aria-hidden="true" title="Node">
+                <i class="fab fa-node-js" style="color: #339933;"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-indicator" aria-hidden="true">
+        <div class="scroll-mouse">
+            <div class="scroll-wheel"></div>
+        </div>
+        <span class="scroll-text">SCROLL</span>
+    </div>
+</section>
+
+<section id="about" class="about-section">
+    <div class="section-header">
+        <span class="tag">About Me</span>
+        <h2>Engineering Mindset & Passion</h2>
+    </div>
+    <div class="about-grid">
+        <div class="about-narrative reveal">
+            <p class="about-lead">I am a final-year Computer Science Engineering student at <strong>Sathyabama Institute of Science and Technology</strong> and a <strong>Software Developer Intern at Inteovo Edu</strong>, building production school automation, payroll, and attendance systems.</p>
+            <p class="about-desc">My engineering approach is rooted in <em>clarity over complexity</em>: whether designing distributed streaming pipelines, fine-tuning classification algorithms, or crafting pixel-perfect, 60fps user interfaces, I prioritize maintainability, security, and exceptional user experience.</p>
+            <div class="about-highlights">
+                <div class="highlight-item">
+                    <div class="highlight-icon"><i class="fas fa-layer-group"></i></div>
+                    <div>
+                        <h4>Full-Stack Mastery</h4>
+                        <p>Enterprise React, TypeScript, Node.js, and PostgreSQL architectures built for reliability.</p>
+                    </div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon"><i class="fas fa-brain"></i></div>
+                    <div>
+                        <h4>Applied Machine Learning</h4>
+                        <p>Predictive modeling, real-time transaction fraud detection, and health risk classification.</p>
+                    </div>
+                </div>
+                <div class="highlight-item">
+                    <div class="highlight-icon"><i class="fas fa-cloud"></i></div>
+                    <div>
+                        <h4>Cloud & Containerization</h4>
+                        <p>Oracle Cloud Infrastructure (OCI) 2025 Associate certified, Docker container workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="about-card-stat reveal">
+            <div class="code-terminal-card">
+                <div class="terminal-bar">
+                    <div class="terminal-dots">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <span class="terminal-title">sharan@dev: ~/profile</span>
+                </div>
+                <div class="terminal-body">
+                    <p><span class="prompt">$</span> cat profile.json</p>
+                    <pre class="terminal-code"><code>{
+  "name": "Sharan R",
+  "role": "Software Developer Intern",
+  "company": "Inteovo Edu (SAS)",
+  "education": "B.E CSE, Sathyabama",
+  "graduation": "June 2026",
+  "stack": ["React", "TypeScript", "PostgreSQL", "ML"],
+  "location": "Chennai, India",
+  "status": "Ready for high-impact roles"
+}</code></pre>
+                    <p class="terminal-status"><span class="prompt">$</span> <span class="blink">▌</span></p>
+                </div>
+            </div>
+            <!-- GITHUB LIVE STATS & HEATMAP CARD -->
+            <div class="github-stats-card">
+                <div class="github-card-header">
+                    <div class="github-user-wrap">
+                        <i class="fab fa-github github-logo-icon"></i>
+                        <div>
+                            <span class="github-username">@Sharan20040805</span>
+                            <span class="github-role-tag">Active Contributor</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/Sharan20040805" target="_blank" rel="noopener noreferrer" class="github-badge-link" title="Open GitHub Profile">
+                        <i class="fas fa-external-link-alt"></i> Follow
+                    </a>
+                </div>
+                <div class="github-stats-row">
+                    <div class="github-stat-pill">
+                        <span class="stat-num" id="gh-repos-count">6+</span>
+                        <span class="stat-label">Public Repos</span>
+                    </div>
+                    <div class="github-stat-pill">
+                        <span class="stat-num">380+</span>
+                        <span class="stat-label">Commits ('25-'26)</span>
+                    </div>
+                    <div class="github-stat-pill">
+                        <span class="stat-num">🔥 48d</span>
+                        <span class="stat-label">Active Streak</span>
+                    </div>
+                </div>
+                <!-- Mini Commit Activity Grid -->
+                <div class="github-heatmap-wrap">
+                    <span class="heatmap-title">Contribution Matrix (Recent Activity)</span>
+                    <div class="github-heatmap-grid" id="github-heatmap-grid" aria-label="Commit activity heatmap">
+                        <!-- Populated dynamically with commit cells -->
+                    </div>
+                </div>
+                <!-- Tech Distribution -->
+                <div class="github-lang-dist">
+                    <div class="lang-bar">
+                        <span class="lang-segment" style="width: 38%; background: #3178c6;" title="TypeScript 38%"></span>
+                        <span class="lang-segment" style="width: 28%; background: #3572A5;" title="Python 28%"></span>
+                        <span class="lang-segment" style="width: 20%; background: #f1e05a;" title="JavaScript 20%"></span>
+                        <span class="lang-segment" style="width: 14%; background: #336791;" title="PostgreSQL / SQL 14%"></span>
+                    </div>
+                    <div class="lang-legend">
+                        <span><i class="fas fa-circle" style="color: #3178c6;"></i> TypeScript 38%</span>
+                        <span><i class="fas fa-circle" style="color: #3572A5;"></i> Python 28%</span>
+                        <span><i class="fas fa-circle" style="color: #f1e05a;"></i> JS 20%</span>
+                        <span><i class="fas fa-circle" style="color: #336791;"></i> SQL 14%</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -80,15 +361,15 @@
     </div>
     <div class="milestone-grid">
         <div class="milestone-card reveal">
-            <div class="milestone-value" data-target="5">0</div>
-            <div class="milestone-label">Projects</div>
+            <div class="milestone-value" data-target="6">0</div>
+            <div class="milestone-label">Projects & Apps</div>
         </div>
         <div class="milestone-card reveal">
             <div class="milestone-value" data-target="5">0</div>
             <div class="milestone-label">Certifications</div>
         </div>
         <div class="milestone-card reveal">
-            <div class="milestone-value" data-target="45" data-suffix=" hrs">0</div>
+            <div class="milestone-value" data-target="45" data-suffix=" hrs"><span class="milestone-num">0</span><span class="milestone-suffix"> hrs</span></div>
             <div class="milestone-label">Training Hours</div>
         </div>
         <div class="milestone-card reveal">
@@ -99,95 +380,228 @@
 </section>
 
 <section id="skills" class="skills-container">
-    <h2 class="section-title">Skills</h2>
-    <p class="section-subtitle">I have successfully implemented these technologies across various projects to create scalable software solutions and intuitive user interfaces.</p>
+    <div class="skills-header-pinned">
+        <div class="section-header">
+            <span class="tag">Expertise</span>
+            <h2 class="section-title">Skills</h2>
+        </div>
+        <p class="section-subtitle">I have successfully implemented these technologies across various projects to create scalable software solutions and intuitive user interfaces.</p>
+    </div>
+
+    <div class="skills-filter-bar">
+        <button class="skill-filter-btn active" type="button" data-skill-filter="all">All (19)</button>
+        <button class="skill-filter-btn" type="button" data-skill-filter="languages">Languages</button>
+        <button class="skill-filter-btn" type="button" data-skill-filter="frontend">Frontend</button>
+        <button class="skill-filter-btn" type="button" data-skill-filter="backend">Backend & DB</button>
+        <button class="skill-filter-btn" type="button" data-skill-filter="tools">DevOps & Tools</button>
+    </div>
 
     <div class="skills-grid">
-        <div class="skill-item">
+        <div class="skill-item" data-skill-category="frontend">
             <i class="fab fa-html5" style="color: #E34F26;"></i>
             <span>HTML</span>
         </div>
-        <div class="skill-item">
+        <div class="skill-item" data-skill-category="frontend">
             <i class="fab fa-css3-alt" style="color: #1572B6;"></i>
             <span>CSS</span>
         </div>
-        <div class="skill-item">
+        <div class="skill-item" data-skill-category="frontend,languages">
             <i class="fab fa-js-square" style="color: #F7DF1E;"></i>
             <span>JAVASCRIPT</span>
         </div>
-        <div class="skill-item">
+        <div class="skill-item" data-skill-category="frontend">
             <i class="fab fa-react" style="color: #61DAFB;"></i>
             <span>REACT JS</span>
         </div>
-        <div class="skill-item">
+        <div class="skill-item" data-skill-category="backend">
             <i class="fab fa-node-js" style="color: #339933;"></i>
             <span>NODE JS</span>
         </div>
-        <div class="skill-item">
+        <div class="skill-item" data-skill-category="tools">
             <i class="fab fa-github" style="color: #ffffff;"></i>
             <span>GITHUB</span>
         </div>
-        <div class="skill-item">
+        <div class="skill-item" data-skill-category="backend">
             <i class="fas fa-database" style="color: #47A248;"></i>
             <span>MONGODB</span>
         </div>
-        <div class="skill-item">
+        <div class="skill-item" data-skill-category="tools">
             <i class="fab fa-docker" style="color: #2496ED;"></i>
             <span>DOCKER</span>
         </div>
-        <div class="skill-item">
+        <div class="skill-item" data-skill-category="languages,backend">
             <i class="fab fa-python" style="color: #3776AB;"></i>
             <span>PYTHON</span>
         </div>
-        <div class="skill-item">
+        <div class="skill-item" data-skill-category="languages,backend">
             <i class="fab fa-java" style="color: #ED8B00;"></i>
             <span>JAVA</span>
         </div>
-        <div class="skill-item">
-    <i class="fas fa-database" style="color: #00758F;"></i>
-    <span>MYSQL</span>
-</div>
+        <div class="skill-item" data-skill-category="backend">
+            <i class="fas fa-database" style="color: #00758F;"></i>
+            <span>MYSQL</span>
+        </div>
+        <div class="skill-item" data-skill-category="languages">
+            <i class="fas fa-code" style="color: #A8B9CC;"></i>
+            <span>C</span>
+        </div>
+        <div class="skill-item" data-skill-category="languages">
+            <i class="fab fa-cuttlefish" style="color: #00599C;"></i>
+            <span>C++</span>
+        </div>
+        <div class="skill-item" data-skill-category="backend">
+            <i class="fab fa-php" style="color: #777BB4;"></i>
+            <span>PHP</span>
+        </div>
+        <div class="skill-item" data-skill-category="tools">
+            <i class="fab fa-git-alt" style="color: #F05032;"></i>
+            <span>GIT</span>
+        </div>
+        <div class="skill-item" data-skill-category="tools">
+            <i class="far fa-file-word" style="color: #2B579A;"></i>
+            <span>WORD</span>
+        </div>
+        <div class="skill-item" data-skill-category="tools">
+            <i class="far fa-file-excel" style="color: #217346;"></i>
+            <span>EXCEL</span>
+        </div>
+        <div class="skill-item" data-skill-category="tools">
+            <i class="far fa-file-powerpoint" style="color: #D24726;"></i>
+            <span>POWERPOINT</span>
+        </div>
+        <div class="skill-item" data-skill-category="tools">
+            <i class="fas fa-palette" style="color: #00C4CC;"></i>
+            <span>CANVA</span>
+        </div>
+    </div>
 
-<div class="skill-item">
-    <i class="fas fa-code" style="color: #A8B9CC;"></i>
-    <span>C</span>
-</div>
+    <!-- COMPUTER SCIENCE FOUNDATIONS & DSA MATRIX -->
+    <div class="cs-fundamentals-card reveal">
+        <div class="cs-header">
+            <div class="cs-title-box">
+                <i class="fas fa-brain cs-icon"></i>
+                <div>
+                    <h3>Computer Science Foundations & Problem Solving</h3>
+                    <p class="cs-sub">Core engineering disciplines, algorithmic efficiency, and scalable system principles.</p>
+                </div>
+            </div>
+            <span class="cs-metric-pill">150+ Problems Solved</span>
+        </div>
+        <div class="cs-grid">
+            <div class="cs-pillar">
+                <div class="pillar-top">
+                    <span class="pillar-name"><i class="fas fa-code-branch"></i> Data Structures & Algorithms</span>
+                    <span class="pillar-pct">85%</span>
+                </div>
+                <div class="pillar-bar"><div class="pillar-progress" style="width: 85%;"></div></div>
+                <p class="pillar-desc">Arrays, Hash Tables, Trees, Graphs, Sorting, Dynamic Programming in C++ / Java / Python.</p>
+            </div>
+            <div class="cs-pillar">
+                <div class="pillar-top">
+                    <span class="pillar-name"><i class="fas fa-database"></i> Database Management (DBMS)</span>
+                    <span class="pillar-pct">90%</span>
+                </div>
+                <div class="pillar-bar"><div class="pillar-progress" style="width: 90%;"></div></div>
+                <p class="pillar-desc">PostgreSQL, MySQL, Schema Design, Indexing, Transactions (ACID), and Query Optimization.</p>
+            </div>
+            <div class="cs-pillar">
+                <div class="pillar-top">
+                    <span class="pillar-name"><i class="fas fa-cubes"></i> OOP & System Design</span>
+                    <span class="pillar-pct">88%</span>
+                </div>
+                <div class="pillar-bar"><div class="pillar-progress" style="width: 88%;"></div></div>
+                <p class="pillar-desc">Inheritance, Polymorphism, Abstraction, SOLID principles, and modular micro-architectures.</p>
+            </div>
+            <div class="cs-pillar">
+                <div class="pillar-top">
+                    <span class="pillar-name"><i class="fas fa-network-wired"></i> OS & Computer Networks</span>
+                    <span class="pillar-pct">82%</span>
+                </div>
+                <div class="pillar-bar"><div class="pillar-progress" style="width: 82%;"></div></div>
+                <p class="pillar-desc">Concurrency, Memory Management, Linux CLI, TCP/IP, DNS, HTTP/HTTPS, and RESTful APIs.</p>
+            </div>
+        </div>
+    </div>
 
-<div class="skill-item">
-    <i class="fab fa-cuttlefish" style="color: #00599C;"></i>
-    <span>C++</span>
-</div>
+    <!-- LIVE INTERACTIVE CODE PLAYGROUND (RUN SHARAN'S CODE) -->
+    <div class="code-playground-card reveal" id="code-playground">
+        <div class="playground-header">
+            <div class="playground-title-box">
+                <i class="fas fa-terminal playground-icon"></i>
+                <div>
+                    <h3>Interactive Code Playground</h3>
+                    <p class="playground-sub">Run Sharan's actual production algorithms live in-browser.</p>
+                </div>
+            </div>
+            <div class="playground-runtime-badge">
+                <span class="runtime-dot"></span>
+                <span>Node.js / V8 Sandbox Engine</span>
+            </div>
+        </div>
 
-<div class="skill-item">
-    <i class="fab fa-php" style="color: #777BB4;"></i>
-    <span>PHP</span>
-</div>
+        <div class="ide-window">
+            <div class="ide-top-bar">
+                <div class="ide-dots">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                </div>
+                <div class="ide-tabs" id="ide-tabs" role="tablist">
+                    <button type="button" class="ide-tab-btn active" data-snippet="payroll" role="tab" aria-selected="true">
+                        <i class="fab fa-js" style="color: #3178c6;"></i> payrollEngine.ts
+                    </button>
+                    <button type="button" class="ide-tab-btn" data-snippet="fraud" role="tab" aria-selected="false">
+                        <i class="fab fa-python" style="color: #3572A5;"></i> fraudClassifier.ts
+                    </button>
+                    <button type="button" class="ide-tab-btn" data-snippet="dsa" role="tab" aria-selected="false">
+                        <i class="fas fa-code-branch" style="color: #f4b400;"></i> binaryBenchmark.ts
+                    </button>
+                </div>
+                <button type="button" class="ide-run-btn" id="ide-run-btn" aria-label="Execute code">
+                    <i class="fas fa-play"></i> Run Code
+                </button>
+            </div>
 
-<div class="skill-item">
-    <i class="fab fa-git-alt" style="color: #F05032;"></i>
-    <span>GIT</span>
-</div>
+            <div class="ide-editor-body">
+                <div class="ide-line-numbers" aria-hidden="true" id="ide-line-numbers">
+                    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span>
+                </div>
+                <pre class="ide-code-display"><code id="ide-code-content">// Loading snippet...</code></pre>
+            </div>
 
-<div class="skill-item">
-    <i class="far fa-file-word" style="color: #2B579A;"></i>
-    <span>WORD</span>
-</div>
+            <!-- Interactive Parameters Control Strip -->
+            <div class="ide-controls-strip" id="ide-controls-strip">
+                <div class="ide-param-group" id="ide-param-group">
+                    <!-- Populated dynamically per snippet -->
+                </div>
+                <div class="ide-latency-metric" id="ide-latency-metric">
+                    <span>Target: <strong>O(1) Memory</strong></span>
+                </div>
+            </div>
 
-<div class="skill-item">
-    <i class="far fa-file-excel" style="color: #217346;"></i>
-    <span>EXCEL</span>
-</div>
+            <!-- Terminal Output Console -->
+            <div class="ide-console">
+                <div class="console-header">
+                    <span class="console-title"><i class="fas fa-laptop-code"></i> Stdout Stream</span>
+                    <button type="button" class="console-clear-btn" id="console-clear-btn" title="Clear console output">Clear</button>
+                </div>
+                <div class="console-body" id="ide-console-output" aria-live="polite">
+                    <span class="console-placeholder">Click [▶ Run Code] to execute this script in the virtual sandbox...</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="skill-item">
-    <i class="far fa-file-powerpoint" style="color: #D24726;"></i>
-    <span>POWERPOINT</span>
-</div>
-<div class="skill-item">
-    <i class="fas fa-palette" style="color: #00C4CC;"></i>
-    <span>CANVA</span>
-</div>
-
-
+    <!-- Infinite Marquee Strip -->
+    <div class="skills-marquee-wrap" aria-hidden="true">
+        <div class="skills-marquee-track">
+            <div class="skills-marquee-content">
+                <span>REACT JS</span> <span class="marquee-bullet">•</span> <span>PYTHON</span> <span class="marquee-bullet">•</span> <span>DOCKER</span> <span class="marquee-bullet">•</span> <span>NODE JS</span> <span class="marquee-bullet">•</span> <span>MONGODB</span> <span class="marquee-bullet">•</span> <span>MYSQL</span> <span class="marquee-bullet">•</span> <span>JAVASCRIPT</span> <span class="marquee-bullet">•</span> <span>C++</span> <span class="marquee-bullet">•</span> <span>JAVA</span> <span class="marquee-bullet">•</span> <span>GIT</span> <span class="marquee-bullet">•</span> <span>HTML5 / CSS3</span> <span class="marquee-bullet">•</span> <span>PHP</span> <span class="marquee-bullet">•</span>
+            </div>
+            <div class="skills-marquee-content" aria-hidden="true">
+                <span>REACT JS</span> <span class="marquee-bullet">•</span> <span>PYTHON</span> <span class="marquee-bullet">•</span> <span>DOCKER</span> <span class="marquee-bullet">•</span> <span>NODE JS</span> <span class="marquee-bullet">•</span> <span>MONGODB</span> <span class="marquee-bullet">•</span> <span>MYSQL</span> <span class="marquee-bullet">•</span> <span>JAVASCRIPT</span> <span class="marquee-bullet">•</span> <span>C++</span> <span class="marquee-bullet">•</span> <span>JAVA</span> <span class="marquee-bullet">•</span> <span>GIT</span> <span class="marquee-bullet">•</span> <span>HTML5 / CSS3</span> <span class="marquee-bullet">•</span> <span>PHP</span> <span class="marquee-bullet">•</span>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -211,6 +625,43 @@
                 <li>Focus: Low-latency detection, explainable alerts, and operational monitoring.</li>
                 <li>Status: Prototype complete, ready for validation with live datasets.</li>
             </ul>
+            <!-- Architecture Flow Diagram -->
+            <div class="arch-diagram" aria-label="System Architecture Flow">
+                <div class="arch-step" data-step="1">
+                    <div class="arch-icon-box"><i class="fas fa-credit-card"></i></div>
+                    <span class="arch-name">Transactions</span>
+                </div>
+                <div class="arch-arrow">
+                    <svg viewBox="0 0 40 12" class="arch-line-svg">
+                        <line x1="0" y1="6" x2="36" y2="6" class="arch-line-flow" />
+                        <polygon points="34,3 39,6 34,9" class="arch-arrowhead" />
+                    </svg>
+                </div>
+                <div class="arch-step" data-step="2">
+                    <div class="arch-icon-box"><i class="fas fa-stream"></i></div>
+                    <span class="arch-name">Streaming</span>
+                </div>
+                <div class="arch-arrow">
+                    <svg viewBox="0 0 40 12" class="arch-line-svg">
+                        <line x1="0" y1="6" x2="36" y2="6" class="arch-line-flow" />
+                        <polygon points="34,3 39,6 34,9" class="arch-arrowhead" />
+                    </svg>
+                </div>
+                <div class="arch-step" data-step="3">
+                    <div class="arch-icon-box"><i class="fas fa-brain"></i></div>
+                    <span class="arch-name">ML Model</span>
+                </div>
+                <div class="arch-arrow">
+                    <svg viewBox="0 0 40 12" class="arch-line-svg">
+                        <line x1="0" y1="6" x2="36" y2="6" class="arch-line-flow" />
+                        <polygon points="34,3 39,6 34,9" class="arch-arrowhead" />
+                    </svg>
+                </div>
+                <div class="arch-step" data-step="4">
+                    <div class="arch-icon-box"><i class="fas fa-bell"></i></div>
+                    <span class="arch-name">Alerts</span>
+                </div>
+            </div>
             <div class="featured-actions">
                 <a href="https://github.com/Sharan20040805" class="btn-work" target="_blank" rel="noopener noreferrer">View Repository</a>
             </div>
@@ -238,13 +689,58 @@
         </div>
         <div class="cert-card reveal">
             <span class="edu-icon">📜</span>
-            <h3>Professional Certs</h3>
-            <ul>
-                <li>Oracle Cloud Infrastructure 2025 Associate</li>
-                <li>IBM: Data Visualization with R</li>
-                <li>ML Training - Sathyabama (45 hrs)</li>
-                <li>IBM: Fundamentals of Encryption</li>
-                <li>Udemy: Full Stack Developer</li>
+            <h3>Professional Certifications</h3>
+            <ul class="cert-list">
+                <li class="cert-list-item" data-cert-key="oci" role="button" tabindex="0" title="Click to view credential details">
+                    <div>
+                        <span class="cert-name">Oracle Cloud Infrastructure 2025</span>
+                        <span class="cert-issuer">Oracle Certified Associate</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="cert-badge">Verified</span>
+                        <i class="fas fa-chevron-right cert-arrow" aria-hidden="true"></i>
+                    </div>
+                </li>
+                <li class="cert-list-item" data-cert-key="ibm-r" role="button" tabindex="0" title="Click to view credential details">
+                    <div>
+                        <span class="cert-name">Data Visualization with R</span>
+                        <span class="cert-issuer">IBM Professional Education</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="cert-badge">Verified</span>
+                        <i class="fas fa-chevron-right cert-arrow" aria-hidden="true"></i>
+                    </div>
+                </li>
+                <li class="cert-list-item" data-cert-key="coe-ml" role="button" tabindex="0" title="Click to view credential details">
+                    <div>
+                        <span class="cert-name">Machine Learning Training (45 hrs)</span>
+                        <span class="cert-issuer">Sathyabama Center of Excellence</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="cert-badge">Completed</span>
+                        <i class="fas fa-chevron-right cert-arrow" aria-hidden="true"></i>
+                    </div>
+                </li>
+                <li class="cert-list-item" data-cert-key="ibm-sec" role="button" tabindex="0" title="Click to view credential details">
+                    <div>
+                        <span class="cert-name">Fundamentals of Encryption</span>
+                        <span class="cert-issuer">IBM Security</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="cert-badge">Verified</span>
+                        <i class="fas fa-chevron-right cert-arrow" aria-hidden="true"></i>
+                    </div>
+                </li>
+                <li class="cert-list-item" data-cert-key="fullstack" role="button" tabindex="0" title="Click to view credential details">
+                    <div>
+                        <span class="cert-name">Full Stack Developer</span>
+                        <span class="cert-issuer">Udemy Academy</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="cert-badge">Certified</span>
+                        <i class="fas fa-chevron-right cert-arrow" aria-hidden="true"></i>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -252,29 +748,56 @@
 
 <section id="experience" class="timeline-section">
     <div class="section-header">
-        <span class="tag">Experience</span>
-        <h2>Timeline</h2>
+        <span class="tag">Experience & Journey</span>
+        <h2>Work Experience & Timeline</h2>
     </div>
     <div class="timeline">
-        <div class="timeline-item reveal">
-            <div class="timeline-year">2025</div>
+        <div class="timeline-line-track">
+            <div class="timeline-line-progress" id="timeline-progress"></div>
+        </div>
+        <div class="timeline-item reveal" data-side="left">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-year">2026</div>
             <div class="timeline-content">
-                <h3>ML Training - Sathyabama</h3>
-                <p>45-hour program focused on ML fundamentals, model evaluation, and real-world datasets.</p>
+                <span class="exp-role-badge">Industrial Internship</span>
+                <h3>Software Developer Intern</h3>
+                <p class="timeline-company"><strong>Inteovo Edu (School Automation Software)</strong> • Chennai</p>
+                <p>Assigned to develop enterprise school management application modules (<code>school-app</code>):</p>
+                <ul class="exp-points">
+                    <li>Developed responsive administrative forms & UI components using <strong>React with TypeScript</strong>.</li>
+                    <li>Engineered a robust <strong>Payroll Management System</strong> integrating <strong>PostgreSQL</strong> and TypeScript.</li>
+                    <li>Built daily <strong>Staff & Student Attendance</strong> tracking and real-time report generation modules.</li>
+                </ul>
+                <div class="tech-chips" style="margin-top: 10px;">
+                    <span class="tech-chip">React</span>
+                    <span class="tech-chip">TypeScript</span>
+                    <span class="tech-chip">PostgreSQL</span>
+                    <span class="tech-chip">School Automation</span>
+                </div>
             </div>
         </div>
-        <div class="timeline-item reveal">
+        <div class="timeline-item reveal" data-side="right">
+            <div class="timeline-dot" aria-hidden="true"></div>
+            <div class="timeline-year">2025</div>
+            <div class="timeline-content">
+                <h3>ML Training — Sathyabama COE</h3>
+                <p>45-hour specialized program focused on ML fundamentals, model evaluation, and real-world datasets.</p>
+            </div>
+        </div>
+        <div class="timeline-item reveal" data-side="left">
+            <div class="timeline-dot" aria-hidden="true"></div>
             <div class="timeline-year">2024</div>
             <div class="timeline-content">
                 <h3>Oracle Cloud Infrastructure Associate</h3>
-                <p>Hands-on learning in cloud fundamentals, security, and compute services.</p>
+                <p>Hands-on learning in cloud architecture, security, compute services, and identity management.</p>
             </div>
         </div>
-        <div class="timeline-item reveal">
+        <div class="timeline-item reveal" data-side="right">
+            <div class="timeline-dot" aria-hidden="true"></div>
             <div class="timeline-year">2023</div>
             <div class="timeline-content">
                 <h3>IBM Data Visualization with R</h3>
-                <p>Built data stories using R, ggplot, and structured analysis.</p>
+                <p>Built data storytelling pipelines and structured statistical analyses using R and ggplot2.</p>
             </div>
         </div>
     </div>
@@ -285,13 +808,42 @@
         <span class="tag">Clarity over Creativity</span>
         <h2>Projects</h2>
     </div>
-    <div class="filter-bar">
-        <button class="filter-btn active" type="button" data-filter="all">All</button>
-        <button class="filter-btn" type="button" data-filter="ml">ML</button>
-        <button class="filter-btn" type="button" data-filter="fullstack">Full-stack</button>
-        <button class="filter-btn" type="button" data-filter="ui">UI</button>
+    <div class="project-controls-bar">
+        <div class="filter-bar">
+            <div class="filter-pill-indicator" aria-hidden="true"></div>
+            <button class="filter-btn active" type="button" data-filter="all">All</button>
+            <button class="filter-btn" type="button" data-filter="ml">ML</button>
+            <button class="filter-btn" type="button" data-filter="fullstack">Full-stack</button>
+            <button class="filter-btn" type="button" data-filter="ui">UI</button>
+        </div>
+        <div class="project-search-box">
+            <i class="fas fa-search project-search-icon"></i>
+            <input type="text" id="project-tech-search" class="project-search-input" placeholder="Filter by tech (e.g. React, PostgreSQL, ML)..." autocomplete="off" spellcheck="false">
+            <button type="button" class="project-search-clear" id="project-search-clear" aria-label="Clear search" style="display: none;">&times;</button>
+        </div>
     </div>
     <div class="bento-grid">
+        <div class="project-card reveal" data-tags="fullstack,ui" data-title="School Automation Platform (school-app) — Inteovo Edu" data-summary="Enterprise school automation software assigned by Inteovo Edu. Features Staff and Student Attendance management, PostgreSQL-backed Payroll Management System, and custom administrative reporting." data-stack="React, TypeScript, PostgreSQL, REST APIs" data-impact="Streamlined daily school operations, automated staff attendance tracking, and accurate payroll calculation for educational institutions." data-dna="88,85,90,85" data-github="https://github.com/Sharan20040805/school-app" data-demo="">
+            <div class="project-img-wrapper">
+                <img src="school-app.svg" alt="School Automation Platform (Inteovo Edu)" loading="lazy" decoding="async">
+            </div>
+            <div class="card-content">
+                <h3>School Automation Platform (Inteovo Edu)</h3>
+                <p>Enterprise school management system: Staff & student attendance tracking, PostgreSQL-backed payroll processing, and responsive React+TypeScript forms.</p>
+                <div class="tech-chips">
+                    <span class="tech-chip">React</span>
+                    <span class="tech-chip">TypeScript</span>
+                    <span class="tech-chip">PostgreSQL</span>
+                    <span class="tech-chip">Payroll System</span>
+                    <span class="tech-chip">Attendance</span>
+                </div>
+                <div class="card-actions">
+                    <button class="details-btn" type="button">Details</button>
+                    <a href="https://github.com/Sharan20040805/school-app" class="github-link" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="#" class="demo-link" data-demo-link>Live Demo</a>
+                </div>
+            </div>
+        </div>
         <div class="project-card reveal" data-tags="ml,fullstack" data-title="Intelligent Online Banking Framework" data-summary="Real-time transaction streaming with ML-driven fraud detection for safer banking." data-stack="Streaming pipelines, ML classification, secure APIs" data-impact="Faster alerts, clear monitoring and explainable signals." data-dna="82,74,80,88" data-github="https://github.com/Sharan20040805" data-demo="">
             <div class="project-img-wrapper">
                 <picture>
@@ -303,6 +855,12 @@
                 <h3> Intelligent Online Banking Framework with Real Time Transaction Streaming, 
 ML Driven Fraud Detection</h3>
                 <p>Stack: Streaming, ML classification, secure APIs. Impact: Faster detection workflow with centralized monitoring.</p>
+                <div class="tech-chips">
+                    <span class="tech-chip">Streaming</span>
+                    <span class="tech-chip">ML</span>
+                    <span class="tech-chip">APIs</span>
+                    <span class="tech-chip">Dashboard</span>
+                </div>
                 <div class="card-actions">
                     <button class="details-btn" type="button">Details</button>
                     <a href="https://github.com/Sharan20040805" class="github-link" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -320,6 +878,11 @@ ML Driven Fraud Detection</h3>
             <div class="card-content">
                 <h3>Echo Cardiogram ML</h3>
                 <p>Stack: Python, Random Forest, data preprocessing. Impact: High-accuracy early risk classification.</p>
+                <div class="tech-chips">
+                    <span class="tech-chip">Python</span>
+                    <span class="tech-chip">Random Forest</span>
+                    <span class="tech-chip">Healthcare ML</span>
+                </div>
                 <div class="card-actions">
                     <button class="details-btn" type="button">Details</button>
                     <a href="https://github.com/Sharan20040805" class="github-link" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -337,6 +900,11 @@ ML Driven Fraud Detection</h3>
             <div class="card-content">
                 <h3>Full-stack Grocery</h3>
                 <p>Stack: PHP, MySQL, admin dashboard. Impact: Streamlined inventory and checkout flow.</p>
+                <div class="tech-chips">
+                    <span class="tech-chip">PHP</span>
+                    <span class="tech-chip">MySQL</span>
+                    <span class="tech-chip">Admin Dashboard</span>
+                </div>
                 <div class="card-actions">
                     <button class="details-btn" type="button">Details</button>
                     <a href="https://github.com/Sharan20040805" class="github-link" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -354,6 +922,11 @@ ML Driven Fraud Detection</h3>
             <div class="card-content">
                 <h3>Weather App</h3>
                 <p>Stack: JS, API integration, responsive UI. Impact: Fast, clear forecast visualization.</p>
+                <div class="tech-chips">
+                    <span class="tech-chip">JavaScript</span>
+                    <span class="tech-chip">REST APIs</span>
+                    <span class="tech-chip">Responsive UI</span>
+                </div>
                 <div class="card-actions">
                     <button class="details-btn" type="button">Details</button>
                     <a href="https://github.com/Sharan20040805" class="github-link" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -371,6 +944,11 @@ ML Driven Fraud Detection</h3>
             <div class="card-content">
                 <h3>CGPA Calculator</h3>
                 <p>Stack: HTML, CSS, JS. Impact: Quick academic planning with clean UX.</p>
+                <div class="tech-chips">
+                    <span class="tech-chip">HTML5</span>
+                    <span class="tech-chip">CSS3</span>
+                    <span class="tech-chip">Vanilla JS</span>
+                </div>
                 <div class="card-actions">
                     <button class="details-btn" type="button">Details</button>
                     <a href="https://github.com/Sharan20040805" class="github-link" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -404,9 +982,197 @@ ML Driven Fraud Detection</h3>
             <div><strong>Stack:</strong> <span id="modal-stack"></span></div>
             <div><strong>Impact:</strong> <span id="modal-impact"></span></div>
         </div>
+        <!-- INTERACTIVE LIVE SIMULATOR CONTAINER -->
+        <div class="modal-simulator-box" id="modal-simulator-box" style="display: none;">
+            <div class="sim-header">
+                <span class="sim-tag"><i class="fas fa-play"></i> Interactive Simulator</span>
+                <span class="sim-note" id="sim-note">Live Logic Playground</span>
+            </div>
+            <div class="sim-content" id="sim-content">
+                <!-- Dynamically populated per project -->
+            </div>
+        </div>
+        <!-- INTERACTIVE FULL-STACK ARCHITECTURE FLOW DIAGRAM -->
+        <div class="modal-architecture-box" id="modal-architecture-box" style="display: none;">
+            <div class="arch-header">
+                <span class="arch-tag"><i class="fas fa-network-wired"></i> Full-Stack System Architecture</span>
+                <span class="arch-note">Click nodes to inspect pipeline</span>
+            </div>
+            <div class="arch-diagram-flow">
+                <div class="arch-node-pill active" data-node="client">
+                    <span class="node-tag">FRONTEND TIER</span>
+                    <h4>React 19 + TypeScript SPA</h4>
+                    <span class="node-sub">Vite, TanStack, Responsive UI</span>
+                </div>
+                <div class="arch-connector">
+                    <div class="connector-line"></div>
+                    <span class="connector-packet" aria-hidden="true"></span>
+                    <span class="connector-label">REST / JSON</span>
+                </div>
+                <div class="arch-node-pill" data-node="gateway">
+                    <span class="node-tag">API GATEWAY</span>
+                    <h4>Node.js Express Controller</h4>
+                    <span class="node-sub">JWT Auth, Rate Limiter, Pool</span>
+                </div>
+                <div class="arch-connector">
+                    <div class="connector-line"></div>
+                    <span class="connector-packet" aria-hidden="true"></span>
+                    <span class="connector-label">ACID Pool</span>
+                </div>
+                <div class="arch-node-pill" data-node="database">
+                    <span class="node-tag">PERSISTENCE TIER</span>
+                    <h4>PostgreSQL / Relational DB</h4>
+                    <span class="node-sub">ACID Transactions, Indexed Tables</span>
+                </div>
+                <div class="arch-connector">
+                    <div class="connector-line"></div>
+                    <span class="connector-packet" aria-hidden="true"></span>
+                    <span class="connector-label">Inference API</span>
+                </div>
+                <div class="arch-node-pill" data-node="ml">
+                    <span class="node-tag">ML INFERENCE</span>
+                    <h4>Python / Scikit-Learn</h4>
+                    <span class="node-sub">Random Forest, FastAPI Service</span>
+                </div>
+            </div>
+            <div class="arch-inspector" id="arch-inspector">
+                <div class="arch-inspector-top">
+                    <span class="inspector-badge" id="arch-insp-badge">FRONTEND TIER</span>
+                    <span class="inspector-latency" id="arch-insp-latency"><i class="fas fa-bolt"></i> Latency: &lt; 35ms</span>
+                </div>
+                <h4 id="arch-insp-title">React 19 + TypeScript SPA Client</h4>
+                <p id="arch-insp-desc">Handles responsive component hydration, optimistic UI updates for attendance rosters, client-side input validation, and asynchronous JSON payloads to Express REST endpoints.</p>
+                <div class="arch-insp-specs" id="arch-insp-specs">
+                    <span>Protocol: <strong>HTTPS / TLS 1.3</strong></span>
+                    <span>State: <strong>Zustand + React Hooks</strong></span>
+                    <span>Bundle: <strong>Tree-shaken ES Modules</strong></span>
+                </div>
+            </div>
+        </div>
         <div class="modal-actions">
+            <button type="button" class="btn-resume sim-toggle-btn" id="sim-toggle-btn">
+                <i class="fas fa-play"></i> Interactive Simulator
+            </button>
+            <button type="button" class="btn-work arch-toggle-btn" id="arch-toggle-btn">
+                <i class="fas fa-network-wired"></i> System Architecture
+            </button>
             <a id="modal-github" class="btn-work" href="#" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a id="modal-demo" class="btn-resume" href="#" target="_blank" rel="noopener noreferrer">Live Demo</a>
+            <a id="modal-demo" class="btn-work" href="#" target="_blank" rel="noopener noreferrer">Direct Link</a>
+        </div>
+    </div>
+</div>
+
+<!-- CERTIFICATE VERIFICATION MODAL -->
+<div class="modal cert-modal" id="cert-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cert-modal-title">
+    <div class="modal-backdrop" data-close-cert></div>
+    <div class="modal-content cert-modal-content">
+        <div class="cert-modal-header">
+            <div class="cert-modal-icon-badge" id="cert-modal-icon"><i class="fas fa-certificate"></i></div>
+            <div class="cert-modal-title-wrap">
+                <span class="cert-modal-tag" id="cert-modal-issuer">Oracle Certified</span>
+                <h3 id="cert-modal-title">Oracle Cloud Infrastructure 2025</h3>
+            </div>
+            <button class="modal-close" type="button" aria-label="Close dialog" data-close-cert>&times;</button>
+        </div>
+        <div class="cert-modal-body">
+            <div class="cert-info-row">
+                <div class="cert-info-item">
+                    <span class="cert-info-label">Verification Status</span>
+                    <span class="cert-badge" id="cert-modal-status">Verified Credential</span>
+                </div>
+                <div class="cert-info-item">
+                    <span class="cert-info-label">Issued Period</span>
+                    <span class="cert-info-val" id="cert-modal-date">2024 - 2025</span>
+                </div>
+            </div>
+            <div class="cert-detail-section">
+                <span class="cert-info-label">Description & Scope</span>
+                <p id="cert-modal-desc" class="cert-modal-desc">In-depth hands-on validation in Oracle Cloud architecture, compute and storage orchestration, identity and access management (IAM), and virtual cloud networking.</p>
+            </div>
+            <div class="cert-detail-section">
+                <span class="cert-info-label">Core Skills Validated</span>
+                <div class="tech-chips" id="cert-modal-skills">
+                    <span class="tech-chip">Cloud Architecture</span>
+                    <span class="tech-chip">Networking</span>
+                    <span class="tech-chip">Security & IAM</span>
+                </div>
+            </div>
+        </div>
+        <div class="cert-modal-actions">
+            <a href="https://linkedin.com/in/sharan-sist" target="_blank" rel="noopener noreferrer" class="btn-resume cert-verify-btn" id="cert-modal-link">
+                <i class="fas fa-arrow-up-right-from-square"></i> Verify on Profile
+            </a>
+            <button type="button" class="btn-work" data-close-cert>Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- RESUME VIEWER MODAL -->
+<div class="resume-modal" id="resume-modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-resume></div>
+    <div class="resume-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="resume-modal-title">
+        <div class="resume-modal-header">
+            <h3 id="resume-modal-title" style="font-size: 1.1rem; color: var(--accent);">Curriculum Vitae - Sharan R</h3>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <a href="sharan resume.pdf" download class="btn-resume" style="padding: 7px 14px; font-size: 0.8rem; text-decoration: none;">Download PDF</a>
+                <button class="modal-close" type="button" data-close-resume aria-label="Close resume viewer" style="margin: 0; padding: 6px 12px;">Close</button>
+            </div>
+        </div>
+        <iframe src="sharan resume.pdf" class="resume-modal-frame" title="Sharan R Resume Preview"></iframe>
+    </div>
+</div>
+
+<!-- INTERACTIVE DEVELOPER CLI TERMINAL MODAL -->
+<div class="terminal-modal" id="terminal-modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-terminal></div>
+    <div class="terminal-window" role="dialog" aria-modal="true" aria-label="Developer Terminal">
+        <div class="terminal-bar">
+            <div class="terminal-dots">
+                <span class="dot red" data-close-terminal style="cursor: pointer;" title="Close terminal"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+            </div>
+            <span class="terminal-title">sharan@portfolio-cli: ~ (Type 'help')</span>
+            <button class="modal-close" type="button" data-close-terminal style="padding: 2px 8px; font-size: 0.7rem; margin: 0;">ESC</button>
+        </div>
+        <div class="terminal-cli-body" id="terminal-cli-body">
+            <div class="terminal-cli-output" id="terminal-cli-output">
+                <div class="out-banner">Antigravity Interactive Developer Console v2.0
+Welcome! Type <span class="out-accent">'help'</span> to see available commands or click the action pills below.</div>
+            </div>
+            <div class="terminal-input-row">
+                <span class="prompt">sharan@dev:~$</span>
+                <input type="text" id="terminal-cli-input" class="terminal-cli-input" autocomplete="off" spellcheck="false" placeholder="type 'help'...">
+            </div>
+        </div>
+        <div class="terminal-pills">
+            <button class="terminal-pill-btn" data-cmd="about">about</button>
+            <button class="terminal-pill-btn" data-cmd="experience">experience</button>
+            <button class="terminal-pill-btn" data-cmd="skills">skills</button>
+            <button class="terminal-pill-btn" data-cmd="projects">projects</button>
+            <button class="terminal-pill-btn" data-cmd="education">education</button>
+            <button class="terminal-pill-btn" data-cmd="hire">hire</button>
+            <button class="terminal-pill-btn" data-cmd="clear">clear</button>
+        </div>
+    </div>
+</div>
+
+<!-- SPOTLIGHT COMMAND PALETTE MODAL (Ctrl + K) -->
+<div class="cmd-palette-modal" id="cmd-palette-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Spotlight Command Palette">
+    <div class="cmd-backdrop" data-close-cmd></div>
+    <div class="cmd-window">
+        <div class="cmd-input-row">
+            <i class="fas fa-search cmd-search-icon"></i>
+            <input type="text" id="cmd-input" class="cmd-input" placeholder="Type a command or jump to section (e.g. 'school', 'resume', 'skills')..." autocomplete="off" spellcheck="false">
+            <span class="cmd-badge"><kbd>ESC</kbd></span>
+        </div>
+        <div class="cmd-results" id="cmd-results">
+            <!-- Commands populated by JS -->
+        </div>
+        <div class="cmd-footer">
+            <span><kbd>↑</kbd> <kbd>↓</kbd> navigate</span>
+            <span><kbd>↵</kbd> select</span>
+            <span><kbd>ESC</kbd> close</span>
         </div>
     </div>
 </div>
@@ -415,34 +1181,314 @@ ML Driven Fraud Detection</h3>
     <div class="footer-container">
         <div class="contact-info">
             <h2>Get in <span class="accent">Touch</span>.</h2>
-            <p>I am seeking opportunities to contribute to projects while growing in technology domains.</p>
+            <p>I am seeking full-time and internship opportunities to build scalable software and innovative machine learning solutions.</p>
             
             <div class="contact-details">
-                <div class="c-item"><strong>Email:</strong> <a href="mailto:sharanr.ittech@gmail.com">sharanr.ittech@gmail.com</a></div>
+                <div class="c-item email-item-row">
+                    <strong>Email:</strong> 
+                    <a href="mailto:sharanr.ittech@gmail.com" id="contact-email-link">sharanr.ittech@gmail.com</a>
+                    <div class="copy-email-box">
+                        <button type="button" class="copy-email-btn" id="copy-email-btn" title="Copy email address" aria-label="Copy email address">
+                            <i class="far fa-copy" id="copy-email-icon"></i>
+                            <span class="copy-email-text" id="copy-email-text">Copy</span>
+                        </button>
+                        <span class="copy-tooltip" id="copy-tooltip" aria-hidden="true">Copied! ✓</span>
+                    </div>
+                </div>
                 <div class="c-item"><strong>Phone:</strong> <a href="tel:+918778613071">+91 87786 13071</a></div>
             </div>
 
             <div class="social-links">
-                <a href="https://linkedin.com/in/sharan-sist" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="https://wa.me/918778613071" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-                <a href="https://github.com/Sharan20040805" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a href="https://linkedin.com/in/sharan-sist" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                <a href="https://wa.me/918778613071" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://github.com/Sharan20040805" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+                <a href="mailto:sharanr.ittech@gmail.com"><i class="fas fa-envelope"></i> Email</a>
             </div>
         </div>
 
         <div class="contact-form">
-            <form action="https://formspree.io/f/your-id" method="POST">
-                <input type="text" name="name" placeholder="Name" autocomplete="name" required>
-                <input type="email" name="email" placeholder="Email" autocomplete="email" required>
-                <textarea name="message" placeholder="Your Message" autocomplete="off" required></textarea>
-                <button type="submit" class="btn-resume">Send Message</button>
+            <form action="https://formspree.io/f/your-id" method="POST" id="contact-form">
+                <div class="form-field">
+                    <input type="text" id="contact-name" name="name" placeholder=" " autocomplete="name" required>
+                    <label for="contact-name">Name</label>
+                    <span class="focus-line"></span>
+                </div>
+                <div class="form-field">
+                    <input type="email" id="contact-email" name="email" placeholder=" " autocomplete="email" required>
+                    <label for="contact-email">Email</label>
+                    <span class="focus-line"></span>
+                </div>
+                <div class="form-field">
+                    <textarea id="contact-message" name="message" placeholder=" " autocomplete="off" required></textarea>
+                    <label for="contact-message">Your Message</label>
+                    <span class="focus-line"></span>
+                </div>
+                <button type="submit" class="btn-resume btn-submit" id="contact-submit-btn">
+                    <span class="btn-submit-text">Send Message</span>
+                    <span class="btn-submit-spinner" aria-hidden="true"></span>
+                    <span class="btn-submit-check" aria-hidden="true"><i class="fas fa-check"></i></span>
+                </button>
             </form>
-            <p class="form-note">Replace the Formspree endpoint to enable submissions.</p>
+            <p class="form-note">Direct inquiries: <a href="mailto:sharanr.ittech@gmail.com" style="color: var(--accent);">sharanr.ittech@gmail.com</a></p>
         </div>
     </div>
+
+    <!-- COMMUNITY REACTIONS & GUESTBOOK BAR -->
+    <div class="community-reactions-bar reveal" id="community-reactions-bar">
+        <div class="reactions-header">
+            <div class="reactions-title-wrap">
+                <span class="reactions-emoji">🚀</span>
+                <div>
+                    <h4>Recruiter Feedback & Community Reactions</h4>
+                    <p>Visiting Sharan's portfolio? Leave a live reaction or endorsement note below!</p>
+                </div>
+            </div>
+            <button type="button" class="star-portfolio-btn" id="star-portfolio-btn" title="Leave a Star on this portfolio">
+                <i class="fas fa-star"></i>
+                <span>Star Portfolio</span>
+                <span class="star-counter" id="star-counter">128</span>
+            </button>
+        </div>
+        <div class="reaction-buttons-cluster">
+            <button type="button" class="reaction-pill-btn" data-reaction="fire">
+                <span class="reaction-icon">🔥</span>
+                <span class="reaction-label">Awesome Work</span>
+                <span class="reaction-count" id="count-fire">94</span>
+            </button>
+            <button type="button" class="reaction-pill-btn" data-reaction="rocket">
+                <span class="reaction-icon">🚀</span>
+                <span class="reaction-label">Hire Ready</span>
+                <span class="reaction-count" id="count-rocket">82</span>
+            </button>
+            <button type="button" class="reaction-pill-btn" data-reaction="bulb">
+                <span class="reaction-icon">💡</span>
+                <span class="reaction-label">Great UI/UX</span>
+                <span class="reaction-count" id="count-bulb">67</span>
+            </button>
+            <button type="button" class="reaction-pill-btn" data-reaction="clap">
+                <span class="reaction-icon">👏</span>
+                <span class="reaction-label">Impressive</span>
+                <span class="reaction-count" id="count-clap">53</span>
+            </button>
+        </div>
+        <!-- Quick Endorsement Note Form & Live Stream -->
+        <div class="guestbook-drawer" id="guestbook-drawer">
+            <div class="guestbook-form" id="guestbook-form">
+                <input type="text" id="guestbook-name" class="guestbook-input" placeholder="Your Name / Org (e.g. Alex, Tech Recruiter)" maxlength="40">
+                <input type="text" id="guestbook-note" class="guestbook-input" placeholder="Quick comment / note for Sharan..." maxlength="120">
+                <button type="button" id="guestbook-submit-btn" class="btn-resume guestbook-submit-btn">Post Note</button>
+            </div>
+            <div class="guestbook-stream" id="guestbook-stream" aria-live="polite">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
     <div class="footer-bottom">
-        &copy;  Sharan R.
+        &copy;  Sharan R. Built with code, performance, and motion.
     </div>
 </footer>
+
+<!-- FLOATING QUICK ACTION DOCK (BOTTOM CENTER) -->
+<aside class="floating-quick-dock" id="floating-quick-dock" aria-label="Quick Actions Dock">
+    <div class="dock-inner">
+        <button type="button" class="dock-btn" id="dock-cv-btn" title="Preview Resume (CV)">
+            <i class="fas fa-file-pdf"></i>
+            <span class="dock-text">CV</span>
+        </button>
+        <div class="dock-divider"></div>
+        <button type="button" class="dock-btn" id="dock-onepager-btn" title="Recruiter One-Pager (O)">
+            <i class="fas fa-file-invoice"></i>
+            <span class="dock-text">Summary</span>
+        </button>
+        <div class="dock-divider"></div>
+        <a href="https://wa.me/918778613071" target="_blank" rel="noopener noreferrer" class="dock-btn" title="Chat on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+            <span class="dock-text">WhatsApp</span>
+        </a>
+        <div class="dock-divider"></div>
+        <button type="button" class="dock-btn" id="dock-copy-btn" title="Copy Email Address">
+            <i class="far fa-envelope"></i>
+            <span class="dock-text">Email</span>
+        </button>
+        <div class="dock-divider"></div>
+        <button type="button" class="dock-btn" id="dock-shortcuts-btn" title="Keyboard Shortcuts (?)">
+            <kbd class="dock-kbd">?</kbd>
+        </button>
+        <div class="dock-divider"></div>
+        <a href="#contact" class="dock-btn dock-cta" title="Reach Out">
+            <span>Hire Me</span>
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+</aside>
+
+<!-- KEYBOARD SHORTCUTS HUD MODAL (?) -->
+<div class="modal shortcuts-modal" id="shortcuts-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="shortcuts-title">
+    <div class="modal-backdrop" data-close-shortcuts></div>
+    <div class="modal-content shortcuts-content">
+        <div class="shortcuts-header">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-keyboard" style="color: var(--accent); font-size: 1.25rem;"></i>
+                <h3 id="shortcuts-title">Keyboard Shortcuts HUD</h3>
+            </div>
+            <button class="modal-close" type="button" data-close-shortcuts aria-label="Close shortcuts">&times;</button>
+        </div>
+        <p class="shortcuts-sub">Navigate and control the portfolio like a pro developer using hotkeys.</p>
+        <div class="shortcuts-grid">
+            <div class="shortcut-row">
+                <span class="shortcut-action">Open Spotlight Search</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd> + <kbd>K</kbd> / <kbd>⌘K</kbd></span>
+            </div>
+            <div class="shortcut-row">
+                <span class="shortcut-action">Open Developer CLI Terminal</span>
+                <span class="shortcut-keys"><kbd>Ctrl</kbd> + <kbd>`</kbd></span>
+            </div>
+            <div class="shortcut-row">
+                <span class="shortcut-action">Open Recruiter One-Pager</span>
+                <span class="shortcut-keys"><kbd>O</kbd></span>
+            </div>
+            <div class="shortcut-row">
+                <span class="shortcut-action">Toggle Dark / Light Theme</span>
+                <span class="shortcut-keys"><kbd>T</kbd></span>
+            </div>
+            <div class="shortcut-row">
+                <span class="shortcut-action">Toggle Motion & Animations</span>
+                <span class="shortcut-keys"><kbd>M</kbd></span>
+            </div>
+            <div class="shortcut-row">
+                <span class="shortcut-action">Toggle Audio Effects (Sound)</span>
+                <span class="shortcut-keys"><kbd>S</kbd></span>
+            </div>
+            <div class="shortcut-row">
+                <span class="shortcut-action">Close Any Active Dialog / Modal</span>
+                <span class="shortcut-keys"><kbd>Esc</kbd></span>
+            </div>
+            <div class="shortcut-row">
+                <span class="shortcut-action">Open Keyboard Shortcuts Guide</span>
+                <span class="shortcut-keys"><kbd>?</kbd></span>
+            </div>
+        </div>
+        <div class="shortcuts-footer">
+            <span>Tip: Press <kbd>O</kbd> for instant 1-page recruiter summary!</span>
+            <button type="button" class="btn-work" data-close-shortcuts style="padding: 6px 16px; font-size: 0.8rem;">Got It</button>
+        </div>
+    </div>
+</div>
+
+<!-- RECRUITER ONE-PAGER MODAL (PRINT/SAVE OPTIMIZED) -->
+<div class="modal onepager-modal" id="onepager-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="onepager-title">
+    <div class="modal-backdrop" data-close-onepager></div>
+    <div class="onepager-dialog">
+        <!-- Floating Print & Close Action Bar -->
+        <div class="onepager-top-bar no-print">
+            <div class="onepager-bar-left">
+                <span class="onepager-tag"><i class="fas fa-file-invoice"></i> Executive One-Pager</span>
+                <span class="onepager-hint">Formatted for rapid 60-second recruiter scans & A4 printing.</span>
+            </div>
+            <div class="onepager-bar-right">
+                <button type="button" class="btn-resume onepager-print-btn" id="onepager-print-btn">
+                    <i class="fas fa-print"></i> Print / Save PDF
+                </button>
+                <button type="button" class="modal-close" data-close-onepager aria-label="Close One-Pager">&times;</button>
+            </div>
+        </div>
+
+        <!-- Printable Document Canvas -->
+        <div class="onepager-paper" id="onepager-printable">
+            <header class="onepager-header">
+                <div>
+                    <h1 class="onepager-name" id="onepager-title">SHARAN R</h1>
+                    <p class="onepager-role">Full Stack Developer & Applied ML Enthusiast</p>
+                    <p class="onepager-location">Chennai, India • <a href="mailto:sharanr.ittech@gmail.com">sharanr.ittech@gmail.com</a> • +91 87786 13071</p>
+                </div>
+                <div class="onepager-links">
+                    <a href="https://linkedin.com/in/sharan-sist" target="_blank" rel="noopener noreferrer">linkedin.com/in/sharan-sist</a>
+                    <a href="https://github.com/Sharan20040805" target="_blank" rel="noopener noreferrer">github.com/Sharan20040805</a>
+                    <span class="onepager-badge">OCI 2025 Associate</span>
+                </div>
+            </header>
+
+            <div class="onepager-highlights">
+                <div class="op-stat">
+                    <span class="op-stat-num">B.E CSE</span>
+                    <span class="op-stat-lbl">Sathyabama ('22 - '26)</span>
+                </div>
+                <div class="op-stat">
+                    <span class="op-stat-num">Inteovo Edu</span>
+                    <span class="op-stat-lbl">Software Dev Intern</span>
+                </div>
+                <div class="op-stat">
+                    <span class="op-stat-num">150+</span>
+                    <span class="op-stat-lbl">DSA Problems Solved</span>
+                </div>
+                <div class="op-stat">
+                    <span class="op-stat-num">6+ Apps</span>
+                    <span class="op-stat-lbl">Production & ML Repos</span>
+                </div>
+            </div>
+
+            <section class="onepager-sec">
+                <h3 class="sec-heading">EXPERIENCE</h3>
+                <div class="op-exp-item">
+                    <div class="op-exp-head">
+                        <strong>Software Developer Intern — Inteovo Edu (School Automation Software)</strong>
+                        <span>Jan 2026 – Present | Chennai</span>
+                    </div>
+                    <ul>
+                        <li>Engineered enterprise school automation modules (<strong>school-app</strong>) integrating React, TypeScript, and PostgreSQL.</li>
+                        <li>Built high-reliability <strong>Staff & Student Attendance</strong> tracking engine with instant automated summary reporting.</li>
+                        <li>Implemented dynamic <strong>Payroll Management System</strong> ensuring mathematical precision in tax and wage calculations.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="onepager-sec">
+                <h3 class="sec-heading">FLAGSHIP PROJECTS</h3>
+                <div class="op-proj-grid">
+                    <div class="op-proj">
+                        <strong>1. School Automation Platform (school-app)</strong>
+                        <p>Enterprise school platform featuring automated roster attendance, PostgreSQL payroll calculations, and administrative analytics.</p>
+                        <span class="op-stack">React • TypeScript • PostgreSQL • Node.js</span>
+                    </div>
+                    <div class="op-proj">
+                        <strong>2. Intelligent Online Banking Framework</strong>
+                        <p>Real-time streaming transaction processing engine with ML anomaly detection for proactive fraud prevention.</p>
+                        <span class="op-stack">Streaming Pipelines • ML Classification • Secure REST APIs</span>
+                    </div>
+                    <div class="op-proj">
+                        <strong>3. Echo Cardiogram ML Risk Classifier</strong>
+                        <p>Predictive cardiac health screening web application achieving 85%+ accuracy on clinical patient attributes.</p>
+                        <span class="op-stack">Python • Scikit-Learn • Random Forest • Flask</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="onepager-sec">
+                <h3 class="sec-heading">TECHNICAL SKILLS</h3>
+                <div class="op-skills-grid">
+                    <div><strong>Languages:</strong> C, C++, Java, Python, JavaScript (ES6+), TypeScript, SQL, PHP</div>
+                    <div><strong>Frontend:</strong> React.js, HTML5, CSS3, Responsive Design, State Management, UI/UX</div>
+                    <div><strong>Backend & Data:</strong> Node.js, Express.js, PostgreSQL, MySQL, MongoDB, RESTful APIs</div>
+                    <div><strong>Cloud & DevOps:</strong> Oracle Cloud Infrastructure (OCI 2025), Docker, Git, GitHub</div>
+                </div>
+            </section>
+
+            <section class="onepager-sec">
+                <h3 class="sec-heading">EDUCATION & CERTIFICATIONS</h3>
+                <div class="op-edu-row">
+                    <div>
+                        <strong>B.E. in Computer Science and Engineering</strong> — Sathyabama Institute (2022 – 2026)
+                    </div>
+                    <div class="op-certs-list">
+                        <span>• Oracle Cloud Infrastructure 2025 Certified Foundations Associate</span>
+                        <span>• IBM Data Visualization with R</span>
+                        <span>• 45-hr Machine Learning Training (Sathyabama COE)</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
 </body>
 </html>

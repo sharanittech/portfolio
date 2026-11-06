@@ -1,0 +1,24 @@
+{
+  "name": "Sharan R — Full Stack Developer & ML Portfolio",
+  "short_name": "Sharan R",
+  "description": "Portfolio of Sharan R: Full Stack Developer, ML Enthusiast, and Software Developer Intern at Inteovo Edu.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#050505",
+  "theme_color": "#f4b400",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
